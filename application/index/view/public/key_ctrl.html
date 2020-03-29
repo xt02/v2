@@ -1,0 +1,44 @@
+<div class="row">
+    <form class="form-horizontal col-md-3" id="do-imp">
+        <div class="form-group">
+            <label class="col-md-12">请输入要重点关注的关键字</label>
+            <div class="col-md-12">
+                <textarea class="form-control" id="do-imp-content01" rows="20"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info col-md-offset-1 col-md-4" id="submit00">删除关键字</button>
+            <button type="submit" class="btn btn-danger col-md-offset-1 col-md-4" id="new-do">详情切换</button>
+        </div>
+    </form>
+
+    <form class="form-horizontal col-md-3" action="{:url('imp/index')}" method="post" target="_blank">
+        <input type="hidden" name="cat_date" value="{$Request.param.cat_date}">
+        <input type="hidden" name="cat_id" value="{volist name="catDateInfo" id="cat"}{eq name="$cat.id" value="$Request.param.cat_date" }{$cat.pro_cat_id}{/eq}{/volist}">
+        <div class="form-group">
+            <label class="col-md-12">重点关注的关键词{教学视频}</label>
+            <div class="col-md-12">
+                <textarea class="new-do form-control" name="do-imp-content02" id="do-imp-content02" rows="20">{$keyImpList}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info col-md-offset-1 col-md-4" id="do-imp-content02-submit">一键查看</button>
+        </div>
+    </form>
+
+    <form class="form-horizontal col-md-3" action="{:url('imp/index')}" method="post" target="_blank">
+        <input type="hidden" name="cat_date" value="{$Request.param.cat_date}">
+        <input type="hidden" name="cat_id" value="{volist name="catDateInfo" id="cat"}{eq name="$cat.id" value="$Request.param.cat_date" }{$cat.pro_cat_id}{/eq}{/volist}">
+        <div class="form-group">
+            <label class="col-md-12">重点关注的关键词{入门}</label>
+            <div class="col-md-12">
+                <textarea class="new-do form-control" name="do-imp-content02" id="do-imp-content02" rows="20">{$keyImpList}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info col-md-offset-1 col-md-4" id="do-imp-content02-submit">一键查看</button>
+        </div>
+    </form>
+
+
+</div>

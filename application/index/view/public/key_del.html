@@ -1,0 +1,145 @@
+<form class="form-horizontal col-md-3" id="dodel">
+
+    <div class="form-group">
+        <label class="col-md-12">请输入要数据库中关键字删除</label>
+        <div class="col-md-12">
+            <textarea class="form-control" id="content00" rows="20"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-info col-md-offset-1 col-md-4" id="submit00">删除关键字</button>
+        <button type="submit" class="btn btn-danger col-md-offset-1 col-md-4" id="new-do">详情切换</button>
+    </div>
+
+    <div class="m20"></div>
+</form>
+
+<form class="form-horizontal col-md-3">
+    <div class="form-group">
+        <label class="col-md-12">
+            已经剔除的关键词:<span id="key-num-01" style="display: none;color: red;">{$newDodo[1]}</span>
+            <script type="text/javascript">
+                var num = document.getElementById("key-num-01");
+                var x = num.innerText.split("\n");
+                num.innerText = x.length;
+                num.style.display = 'inline';
+            </script>
+        </label>
+        <div class="col-md-12">
+            <textarea class="new-do form-control dplay" rows="20">{$newDodo[0]}</textarea>
+            <textarea class="new-do form-control" name="content01" id="content01"  rows="20">{$newDodo[1]}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info col-md-offset-1 col-md-4" id="submit01">短语否定</button>
+    </div>
+    <div class="m20"></div>
+</form>
+
+<form class="form-horizontal col-md-3">
+    <div class="form-group">
+        <label class="col-md-12">
+            精准否定关键词:<span id="key-num-02" style="display: none;color: red;">{$newDo02[1]}</span>
+            <script type="text/javascript">
+                var num = document.getElementById("key-num-02");
+                var x = num.innerText.split("\n");
+                num.innerText = x.length;
+                num.style.display = 'inline';
+            </script>
+        </label>
+        <div class="col-md-12">
+            <textarea class="new-do form-control dplay"  rows="20">{$newDo02[0]}</textarea>
+            <textarea class="new-do form-control" id="content02"  rows="20">{$newDo02[1]}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success col-md-offset-1 col-md-3" id="submit02" >精准否定</button>
+        <label class="col-md-7">
+            <select class="form-control" id="cat_date">
+                {volist name="catDateInfo" id="cat"}
+                <option value="{$cat.id}"
+                        {eq name="$cat.id" value="$Request.param.cat_date" }
+                        selected
+                        {/eq}
+                >{$cat.date}</option>
+                {/volist}
+            </select>
+        </label>
+    </div>
+    <div class="m20"></div>
+</form>
+
+
+<script>
+    $("#new-do").on("click",function () {
+        $('.new-do').toggleClass('dplay');
+        return false;
+    });
+    $('#submit00').on('click',function () {
+        var content = $("#content00").val();
+        var cat_date = $("#cat_date").val();
+        $.ajax({
+            type:'post',
+            url:"{:url('sol/do00')}",
+            data:{
+                content:content,
+                cat_date:cat_date
+            },
+            dataType:'json',
+            success:function (d) {
+                layer.confirm(d.mess+'个数'+d.num,
+                    {btn:['刷新看看','我在看看']},
+                    function () {
+                        window.location.href = "{:url('keywords/check')}"+"?cat_date="+d.cat_date;
+                    }
+                );
+            }
+        });
+        return false;
+    });
+    $('#submit01').on('click',function () {
+        var content = $("#content01").val();
+        var cat_date = $("#cat_date").val();
+        $.ajax({
+            type:'post',
+            url:"{:url('sol/do01')}",
+            data:{
+                content:content,
+                cat_date:cat_date
+            },
+            dataType:'json',
+            success:function (d) {
+                layer.confirm(d.mess+'个数'+d.num,
+                    {btn:['刷新看看','我在看看']},
+                    function () {
+                        window.location.href = "{:url('keywords/check')}"+"?cat_date="+d.cat_date;
+                    }
+                );
+            }
+        });
+        return false;
+    });
+    $('#submit02').on('click',function () {
+        var content = $("#content02").val();
+        var cat_date = $("#cat_date").val();
+        $.ajax({
+            type:'post',
+            url:"{:url('sol/do02')}",
+            data:{
+                content:content,
+                cat_date:cat_date
+            },
+            dataType:'json',
+            success:function (d) {
+                layer.confirm(d.mess+'个数'+d.num,
+                    {btn:['刷新看看','我在看看']},
+                    function () {
+                        window.location.href = "{:url('keywords/check')}"+"?cat_date="+d.cat_date;
+                    }
+                );
+            }
+        });
+        return false;
+    })
+</script>

@@ -1,0 +1,39 @@
+<!--<ul class="nav nav-pills nav-stacked">
+    <li class="nav-header h3">系统管理</li>
+    <li><a href="{:url('site/index')}"><span class="glyphicon glyphicon-cog"></span>&nbsp;网站管理</a></li>
+</ul>
+
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="nav-header h3">用户管理</li>
+    <li><a href="{:url('user/userList')}"><span class="glyphicon glyphicon-user"></span>&nbsp;用户列表</a></li>
+</ul>
+-->
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="nav-header h3">关键词管理</li>
+    <li><a href="{:url('keywords/index')}"><span class="glyphicon glyphicon-lock"></span>&nbsp;关键词添加</a></li>
+    <li><a href="{:url('pro/index')}"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;订单词添加</a></li>
+</ul>
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="navbar-header h3">文档目录管理</li>
+    {volist name="catDateInfo" id="cat"}
+    <li
+            {eq name="$cat.id" value="$Request.param.cat_date" }
+            class="active"
+            {/eq}
+    ><a href="{:url('keywords/check',['cat_date' => $cat.id])}"><span class="glyphicon glyphicon-lock"></span>&nbsp;{$cat.date}</a></li>
+    {/volist}
+</ul>
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="navbar-header h3">订单词管理</li>
+    {volist name="proCatInfo" id="pro"}
+    <li
+            {eq name="$pro.id" value="$Request.param.cat_id" }
+            class="active"
+            {/eq}
+    ><a href="{:url('pro/check',['cat_id' => $pro.id])}"><span class="glyphicon glyphicon-lock"></span>&nbsp;{$pro.cat}</a></li>
+    {/volist}
+</ul>

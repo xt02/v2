@@ -1,0 +1,460 @@
+{layout name="public:layout" /}
+
+<h4 class="text-center text-success">所有关键词管理</h4>
+
+<ul class="list-inline" style="padding:1%;background-color: #d9edf7;">
+    <li>【<a href="#" style="color: blue;" onclick="keyDel();return false">删除关键词</a>】</li>
+    <li>【<a href="#" style="color: blue" onclick="keyExtr();return false">关键词提取</a>】</li>
+    <li>【<a href="#" style="color: purple" onclick="return false">关键词监控</a>】</li>
+    <li>【<a href="#" style="color: forestgreen" onclick="keyCat();return false">目录名称修改</a>】</li>
+
+
+    <li class="pull-right">【<a href="" onclick="dele({$Request.param.cat_date});return false" style="color: red;">清空所有内容</a>】</li>
+    <li class="pull-right">【<a href="" onclick="delCle({$Request.param.cat_date});return false" style="color: red;">一键全部未处理</a>】</li>
+</ul>
+
+<!--<div id="keyCtrl" class="dplay">-->
+    <!--{include file="public:key_ctrl" /}-->
+<!--</div>-->
+
+<div id="keyCat" class="dplay">
+    {include file="public:key_cat" /}
+</div>
+
+<div id="keyExtr" class="dplay">
+    {include file="public:key_extract" /}
+</div>
+
+<div id="keyDel" class="dplay col-md-12">
+    {include file="public:key_del" /}
+</div>
+
+<table class="table table-default">
+
+    <tr class="text-center btn-warning">
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo" id="keys"}
+                num ++;
+                {/volist}
+                    document.write(num);
+            </script>
+        </td>
+        <td>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo" id="keys"}
+                num += {$keys.display};
+                {/volist}
+                    document.write(num);
+            </script>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo" id="keys"}
+                num += {$keys.point};
+                {/volist}
+                    document.write(num);
+            </script>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo" id="keys"}
+                      num += {$keys.consume};
+                {/volist}
+                document.write(num.toFixed(1));
+            </script>
+        </td>
+        <td>
+        </td>
+        <td></td>
+        <td>
+            <a href="#miao" style="color: red;">PC详情</a>
+        </td>
+    </tr>
+
+    <tr class="text-center btn-warning">
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'id','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            ID
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'id','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'project','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            推广计划
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'project','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'plan','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            推广单元
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'plan','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'keyword','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            关键词
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'keyword','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td style="width:18%;">
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'search','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            搜索词
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'search','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'status','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            添加状态
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'status','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'display','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            展现
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'display','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'point','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            点击
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'point','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'consume','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            消费
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'consume','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'bg','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            处理状态
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'bg','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a></td>
+
+        <td>点击价格</td>
+
+        <td>点击率</td>
+    </tr>
+    {volist name="keysInfo" id="keys"}
+    <tr
+    {neq name="$keys.bg" value="0"}
+
+        {eq name="$keys.bg" value="1" }
+            style="background: yellow;color: red;"
+        {/eq}
+
+        {eq name="$keys.bg" value="2" }
+            style="color: #66CDAA;"
+        {/eq}
+
+        {eq name="$keys.bg" value="3" }
+            style="color: red;"
+        {/eq}
+
+    {/neq}
+    >
+        <td class="text-center">{$keys.id}</td>
+        <td class="text-center">{$keys.project}</td>
+        <td class="text-center">{$keys.plan}</td>
+        <td>{$keys.keyword}</td>
+        <td>{$keys.search}</td>
+        <td class="text-center">{$keys.status}</td>
+        <td class="text-center">{$keys.display}</td>
+        <td class="text-center">{$keys.point}</td>
+        <td class="text-center">{$keys.consume}</td>
+        <td class="text-center">
+            {switch name="$keys.bg"}
+                {case value="0"}未处理{/case}
+                {case value="1"}剔除词{/case}
+                {case value="2"}保留词{/case}
+                {case value="3"}观察词{/case}
+            {/switch}
+        </td>
+        <td class="text-center">
+            <script type="text/javascript">
+                var num = {$keys.consume/$keys.point};
+                document.write(num.toFixed(2));
+            </script>
+        </td>
+        <td class="text-center">
+            <script type="text/javascript">
+                var num = {$keys.point/$keys.display*100};
+                document.write(num.toFixed(2));
+            </script>
+        </td>
+    </tr>
+    {/volist}
+    <tr>
+        <td colspan="10"><div style="height: 100px; "><a id="miao" name="miao"></a></div></td>
+    </tr>
+
+    <tr class="text-center btn-warning">
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo2" id="keys2"}
+                num ++;
+                {/volist}
+                    document.write(num);
+            </script>
+        </td>
+        <td>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo2" id="keys2"}
+                num += {$keys2.display};
+                {/volist}
+                    document.write(num);
+            </script>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo2" id="keys2"}
+                num += {$keys2.point};
+                {/volist}
+                    document.write(num);
+            </script>
+        </td>
+        <td>
+            <script type="text/javascript">
+                var num = 0 ;
+                {volist name="keysInfo2" id="keys2"}
+                num += {$keys2.consume};
+                {/volist}
+                    document.write(num.toFixed(1));
+            </script>
+        </td>
+        <td>
+        </td>
+        <td></td>
+        <td>
+            <a href="#" style="color: red;">手机详情</a>
+        </td>
+    </tr>
+    <tr class="text-center btn-warning">
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'id','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            ID
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'id','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'project','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            推广计划
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'project','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'plan','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            推广单元
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'plan','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'keyword','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            关键词
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'keyword','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'search','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            搜索词
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'search','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'status','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            添加状态
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'status','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'display','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            展现
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'display','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'point','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            点击
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'point','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'consume','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            消费
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'consume','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a>
+        </td>
+        <td>
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'bg','sort'=>'asc'])}"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            处理状态
+            <a href="{:url('keywords/check',['cat_date'=>$Request.param.cat_date,'title'=>'bg','sort'=>'desc'])}"><span class="glyphicon glyphicon-arrow-down"></span></a></td>
+
+        <td>点击价格</td>
+
+        <td>点击率</td>
+
+    </tr>
+    {volist name="keysInfo2" id="keys2"}
+    <tr
+            {neq name="$keys2.bg" value="0"}
+
+            {eq name="$keys2.bg" value="1" }
+            style="background: yellow;color: red;"
+            {/eq}
+
+    {eq name="$keys2.bg" value="2" }
+    style="color: #66CDAA;"
+    {/eq}
+
+    {eq name="$keys2.bg" value="3" }
+    style="color: red;"
+    {/eq}
+
+    {/neq}
+    >
+    <td class="text-center">{$keys2.id}</td>
+    <td class="text-center">{$keys2.project}</td>
+    <td class="text-center">{$keys2.plan}</td>
+    <td>{$keys2.keyword}</td>
+    <td>{$keys2.search}</td>
+    <td class="text-center">{$keys2.status}</td>
+    <td class="text-center">{$keys2.display}</td>
+    <td class="text-center">{$keys2.point}</td>
+    <td class="text-center">{$keys2.consume}</td>
+    <td class="text-center">
+        {switch name="$keys2.bg"}
+        {case value="0"}未处理{/case}
+        {case value="1"}剔除词{/case}
+        {case value="2"}保留词{/case}
+        {case value="3"}观察词{/case}
+        {/switch}
+    </td>
+    <td class="text-center">
+        <script type="text/javascript">
+            var num = {$keys2.consume/$keys2.point};
+            document.write(num.toFixed(2));
+        </script>
+    </td>
+    <td class="text-center">
+        <script type="text/javascript">
+            var num = {$keys2.point/$keys2.display*100};
+            document.write(num.toFixed(2));
+        </script>
+    </td>
+    </tr>
+    {/volist}
+
+
+</table>
+
+<div class="text-center navbar-fixed-bottom">{$keysInfo|raw}</div>
+
+<script>
+    function dele(id) {
+        layer.confirm('您是确定要清空该目录下所有数据吗?',
+            {btn:['确定','我在想想']},
+            function () {
+                $.ajax({
+                    type:'post',
+                    url:"{:url('keywords/del')}",
+                    data:{
+                        cat_date:id
+                    },
+                    dataType:'json',
+                    success:function (d) {
+                        switch(d.status){
+                            case 1:
+                                layer.confirm('需要删除该目录嘛?',
+                                    {btn:['删除该目录','暂且不删除该目录']},
+                                    function () {
+                                        $.ajax({
+                                            type:'post',
+                                            url:"{:url('keywords/delCatDate')}",
+                                            data:{
+                                                cat_id:id
+                                            },
+                                            dataType:'json',
+                                            success:function (e) {
+                                                layer.msg(
+                                                  e.mess,
+                                                    {time:2000,icon:1,title:'温馨提示'},
+                                                    function () {
+                                                        window.location.href = "{:url('index/index')}";
+                                                    }
+                                                );
+                                            }
+                                        });
+                                    },
+                                    //不删除该目录执行
+                                    function () {
+                                        layer.msg(
+                                            d.mess,
+                                            {time:2000,icon:1},
+                                            function () {
+                                                window.location.href = "{:url('keywords/check')}"+"?cat_date="+d.cat_date;
+                                            }
+                                        );
+                                    }
+                                );
+                                break;
+                        }
+                    }
+                });
+            }
+        );
+    }
+    function delCle(id) {
+        layer.confirm('您是确定要设置所有未处理吗?',
+            {btn:['确定','我在想想']},
+            function () {
+                $.ajax({
+                    type:'post',
+                    url:"{:url('keywords/delCle')}",
+                    data:{
+                        cat_date:id
+                    },
+                    dataType:'json',
+                    success:function (d) {
+                        switch(d.status){
+                            case 1:
+                                layer.msg(
+                                    d.mess,
+                                    {time:2000,icon:1},
+                                    function () {
+                                        window.location.href = "{:url('keywords/check')}"+"?cat_date="+d.cat_date;
+                                    }
+                                );
+                                break;
+                        }
+                    }
+                });
+            }
+        );
+
+    }
+</script>
+
+<script>
+    function keyDel() {
+        var k = $('#keyDel');
+        k.toggleClass("dplay");
+    }
+    function keyExtr() {
+        var k = $('#keyExtr');
+        k.toggleClass("dplay");
+    }
+    function keyCat() {
+        var k = $('#keyCat');
+        k.toggleClass("dplay");
+    }
+</script>

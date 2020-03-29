@@ -1,0 +1,42 @@
+{layout name="public:layout" /}
+
+<h4 class="text-center text-success">订单关键词管理</h4>
+
+<ul class="list-inline" style="padding:1%;background-color: #d9edf7;">
+    <li>【<a href="" onclick="dele({$Request.param.cat_id});return false" style="color: red;">清空所有内容</a>】</li>
+</ul>
+
+
+<table class="table table-default table-hover">
+    <tr class="text-center">
+        <td>ID</td>
+        <td>搜索词</td>
+        <td>日期</td>
+        <td>星期</td>
+        <td>时间</td>
+        <td>套装</td>
+    </tr>
+    {volist name="keysInfo" id="keys"}
+    <tr>
+        <td>{$keys.id}</td>
+        <td>{neq name="$keys.search" value="0"}{$keys.search}{/neq}</td>
+        <td>{$keys.pro_day}</td>
+        <td>{$keys.week}</td>
+        <td>{$keys.pro_time}</td>
+        <td>{$keys.suit}</td>
+
+    </tr>
+    {/volist}
+
+
+</table>
+
+<div class="text-center navbar-fixed-bottom">{$keysInfo|raw}</div>
+
+<script>
+    function dele(id) {
+        if(confirm('您是真的要删除吗?')==true){
+            window.location.href = "{:url('pro/del')}"+"?cat_id="+id;
+        }
+    }
+</script>

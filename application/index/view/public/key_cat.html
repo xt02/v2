@@ -1,0 +1,34 @@
+<form class="form-horizontal col-md-12">
+    <div class="form-group">
+        <label class="col-md-3 control-label text-center">请输入修改之后的目录:</label>
+        <div class="col-md-3">
+            <input class="form-control" id="cat-name" rows="1" value="{$catName}">
+        </div>
+        <button type="submit" class="btn btn-info col-md-2" id="change-cat-name">修改目录名称</button>
+    </div>
+</form>
+
+<script>
+    $('#change-cat-name').on('click',function () {
+        var cat_name = $("#cat-name").val();
+        var cat_id = {$Request.param.cat_date};
+        $.ajax({
+            type:'post',
+            url:"{:url('keywords/changCatName')}",
+            data:{
+                cat_name:cat_name,
+                cat_id:cat_id
+            },
+            dataType:'json',
+            success:function (d) {
+                layer.msg(d.mess,
+                    {time:2000,icon:1},
+                    function () {
+                        window.location.href = "{:url('keywords/check')}"+"?cat_date="+d.cat_id;
+                    }
+                )
+            }
+        });
+        return false;
+    });
+</script>

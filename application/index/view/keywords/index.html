@@ -1,0 +1,35 @@
+{layout name="public:layout" /}
+
+<div class="row">
+    <h4 class="text-center text-danger">请输入需要存储的数据</h4>
+    <form class="form-horizontal" action="{:url('keywords/save')}" method="post">
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">请输入:</label>
+            <div class="col-md-10">
+                <textarea name="desc" class="form-control" id="content" style="min-height: 250px" placeholder="包含8个部分,顺序依次是:推广计划/推广单元/关键词/搜索词/账户添加/展现/点击/消费"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">请输入时间目录:</label>
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="cat_date" placeholder="例如:20191029_古筝">
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" name="cat_id" id="cat_id">
+                    {volist name="proCatInfo" id="pro"}
+                    <option value="{$pro.id}">{$pro.cat}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-info">保存</button>
+            </div>
+        </div>
+
+    </form>
+</div>

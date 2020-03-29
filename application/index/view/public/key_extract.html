@@ -1,0 +1,127 @@
+<form class="form-horizontal col-md-12">
+    <div class="form-group">
+        <label class="col-md-3 control-label text-center">请输入查询的关键字:</label>
+        <div class="col-md-3">
+            <input class="form-control" name="keyword" id="keyword" rows="1">
+        </div>
+        <button type="submit" class="btn btn-info col-md-2" id="search">查询关键字</button>
+        <label class="col-md-3">
+            <select class="form-control" name="search-key" id="search-key">
+                <option value="0">所有关键词中搜索</option>
+                <option value="1">去除之后的关键词中搜索</option>
+            </select>
+        </label>
+    </div>
+</form>
+
+<form class="form-horizontal col-md-3">
+    <div class="form-group">
+        <label class="col-md-12">以下是符合要求的关键词<span id="res01"></span></label>
+        <div class="col-md-12">
+            <textarea class="form-control" id="keylist01" rows="20"></textarea>
+        </div>
+    </div>
+
+    <!--<div class="form-group">
+        <button class="btn btn-info col-md-offset-2 col-md-8">一</button>
+    </div>-->
+</form>
+
+<!-- 填写剔除的词语 -->
+<form class="form-horizontal col-md-3">
+    <div class="form-group">
+        <label class="col-md-12">请选择要剔除的词语</label>
+        <div class="col-md-12">
+            <textarea class="form-control" id="keylist02" rows="20"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-info col-md-offset-2 col-md-8" id="submit">确定</button>
+    </div>
+
+</form>
+
+<!-- 剔除短语之后的词语 -->
+<form class="form-horizontal col-md-3">
+    <div class="form-group">
+        <label class="col-md-12">剔除词语之后</label>
+        <div class="col-md-12">
+            <textarea class="form-control" id="keylist03" rows="20"></textarea>
+        </div>
+    </div>
+    <!--<div class="form-group">
+        <button class="btn btn-info col-md-offset-2 col-md-8">确定</button>
+    </div>-->
+</form>
+
+<!-- 批量查询 -->
+<form class="form-horizontal col-md-3" action="{:url('sol/check')}" method="post" target="_blank">
+    <input type="hidden" name="cat_date" value="{$Request.param.cat_date}">
+    <div class="form-group">
+        <label class="col-md-12">请填写要批量查询的词语</label>
+        <div class="col-md-12">
+            <textarea class="form-control" name="keyword02" id="keyword02" rows="20"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <button class="btn btn-info col-md-offset-1 col-md-4">批量查询</button>
+
+        <label class="col-md-6">
+            <select class="form-control" name="cat_id" id="cat_id">
+                {volist name="proCatInfo" id="pro"}
+                {volist name="catDateInfo" id="cat"}
+                    {eq name="$cat.id" value="$Request.param.cat_date" }
+                    <option value="{$pro.id}"
+                        {eq name="$cat.pro_cat_id" value="$pro.id"}
+                        selected
+                        {/eq}
+                    >{$pro.cat}</option>
+                    {/eq}
+                {/volist}
+                {/volist}
+            </select>
+        </label>
+    </div>
+</form>
+
+<script>
+    $('#search').on('click',function () {
+       var keyword = $('#keyword').val();
+       var cat_date = {$Request.param.cat_date};
+       var searchKey = $('#search-key').val();
+       $.ajax({
+           type:'post',
+           url:"{:url('sol/search')}",
+           data:{
+               keyword:keyword,
+               cat_date:cat_date,
+               searchKey:searchKey
+           },
+           dataType:'json',
+           success:function (data) {
+               $('#keylist01').val(data.mess);
+               $('#res01').html("<span style='color:red;font-weight: bold;'>"+data.num+"个</span>");
+           }
+       });
+       return false;
+    });
+    $('#submit').on('click',function () {
+        var keyword = $('#keylist02').val();
+        var keylist = $('#keylist01').val();
+        var str01 = keylist.split("\n");
+        var str02 = keyword.split("\n");
+        var str = str01;
+        for(var i in str){
+            for(var j in str02){
+                str[i] = str[i].replace(str02[j],'');
+            }
+        }
+        var newStr = str.join("\n");
+        $('#keylist03').val(newStr);
+        return false;
+    })
+
+</script>

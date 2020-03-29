@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title|default="后台管理"}</title>
+    {load href="/static/css/bootstrap.css" /}
+    {load href="/static/js/jquery-3.3.1.min.js" /}
+    {load href="/static/js/bootstrap.min.js" /}
+    {load href="/static/js/layer/layer.js" /}
+    <style type="text/css">
+        .dplay{display: none;}
+    </style>
+</head>
+<body>
+
+<div class="container-fluid" style="width: 90%;">
+
+    <div class="row">
+        <div class="col-md-12">
+            {include file="public:nav" /}
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            {include file="public:left" /}
+        </div>
+        <div class="col-md-10">
+            {__CONTENT__}
+        </div>
+    </div>
+
+
+
+</div>
+
+</body>
+</html>
